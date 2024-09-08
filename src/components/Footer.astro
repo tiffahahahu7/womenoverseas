@@ -1,0 +1,189 @@
+---
+interface Props {
+  language: string;
+}
+
+const { language } = Astro.props;
+
+import { Image } from "astro:assets";
+import wo_logo from "./public/wo_logo.webp";
+import donate from "./public/btn_donateCC_LG.gif";
+---
+
+<footer class="footer">
+  <div class="footer-col">
+    <div class="wo-logo">
+      <Image src={wo_logo} alt="woman overseas logo" />
+    </div>
+    <div class="desc">
+      <p>
+        {
+          language === "zh" ? (
+            <>
+              探索广阔的世界，
+              <br />
+              成为更好的自己
+            </>
+          ) : (
+            <>
+              Explore the vast world, <br />
+              Become a better self
+            </>
+          )
+        }
+      </p>
+      <br />
+      <p>501(c)(3) organization</p>
+    </div>
+  </div>
+  <div class="footer-col">
+    <h3>{language === "zh" ? "关注她乡" : "Stay Connected"}</h3>
+    <ul class="footer-menu">
+      <div class="en">
+        <li>
+          <a href="https://www.patreon.com/womenoverseas" target="_blank"
+            >Patreon</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://www.youtube.com/@womenoverseas_taxiang"
+            target="_blank">YouTube</a
+          >
+        </li>
+        <li>
+          <a href="https://www.instagram.com/womenoverseas/" target="_blank"
+            >​Instagram</a
+          >
+        </li>
+      </div>
+      <div class="zh">
+        <li>
+          <a
+            href="https://podcast.womenoverseas.com/"
+            target="_blank">{language === "zh" ? "她乡电台" : "Podcast"}</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://mp.weixin.qq.com/s?__biz=MzAwMTMyNjA1Nw==&mid=2451850815&idx=1&sn=fe03c92f701f50306a513e9194ad2746&chksm=8d0b88b9ba7c01af2cda70bf1834ba68cd46892d640a7920bc3912fd1b64d57b5cbb56c65678&token=562956425&lang=zh_CN#rd"
+            target="_blank">{language === "zh" ? "微信公众号" : "WeChat"}</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://www.xiaohongshu.com/user/profile/604595aa0000000001004db3?xhsshare=CopyLink&appuid=5ba493a1bcc119000128062f&apptime=1615355488"
+            target="_blank">{language === "zh" ? "小红书" : "Red"}</a
+          >
+        </li>
+        <li>
+          <a href="https://m.cmx.im/@womenoverseas" target="_blank">{language === "zh" ? "长毛象" : "Mastodon"}</a>
+        </li>
+      </div>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h3>{language === "zh" ? "赞助她乡" : "Donate"}</h3>
+    <Image class="donate" src={donate} alt="donate button" />
+  </div>
+  <div class="footer-col">
+    <h3>{language === "zh" ? "联系她乡" : "Contact"}</h3>
+    <p class="contact">
+      <a href="mailto:info@womenoverseas.com">info@womenoverseas.com</a>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    display: grid;
+    background-color: white;
+    height: auto;
+    grid-template-rows: 1fr 1fr min-content min-content;
+    grid-template-columns: 100%;
+    justify-items: center;
+    gap: 24px;
+    font-size: 14px;
+    padding: 48px 20px;
+  }
+  .footer h3,
+  .footer p {
+    margin: 0;
+  }
+  .footer-col {
+    display: grid;
+    width: 100%;
+    height: auto;
+    grid-template-rows: min-content 1fr;
+    grid-template-columns: 100%;
+    justify-items: center;
+    gap: 24px;
+  }
+  .footer-col .desc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .footer-col .wo-logo img {
+    width: 170px;
+    height: 65px;
+  }
+  .footer-col h3 {
+    font-size: 20px;
+  }
+  .footer-menu {
+    display: flex;
+    gap: 36px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  .footer-menu .en,
+  .footer-menu .zh {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .footer-col .contact a {
+    text-decoration: none;
+  }
+  @media (min-width: 768px) {
+    .footer {
+      grid-template-rows: 1fr min-content;
+      grid-template-columns: 1fr 1fr 1fr;
+      justify-items: center;
+      padding: 48px 36px;
+    }
+    .footer-col{
+      justify-items: flex-start;
+    }
+    .footer-col:first-child {
+      grid-column: 1/4;
+      grid-template-rows: 100%;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .footer-col .desc {
+      grid-column: 3/4;
+    }
+  }
+  @media (min-width: 992px) {
+    .footer {
+      grid-template-rows: 100%;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      justify-items: center;
+      padding: 48px;
+    }
+    /* .footer-col {
+      justify-items: flex-start;
+    } */
+    .footer-col:first-child {
+      grid-column: unset;
+      grid-template-rows: min-content 1fr;
+      grid-template-columns: 100%;
+    }
+    .footer-col .desc {
+      grid-column: unset;
+      align-items: flex-start;
+    }
+  }
+</style>

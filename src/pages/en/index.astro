@@ -1,0 +1,111 @@
+---
+// import { getRelativeLocaleUrl } from 'astro:i18n';
+import Layout from "../../layouts/Layout.astro";
+import LinkButton from "../../components/LinkButton.astro";
+import CarouselCards from "../../components/CarouselCards.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+---
+
+<Layout title="WomenOverseas">
+  <Nav language="en" />
+  <main>
+    <header>
+      <h1>Welcome to WomenOverseas</h1>
+      <p>
+        WomenOverseas is a global community created for Chinese women and
+        non-binary individuals,
+      </p>
+      <p>
+        providing a platform for free expression, mutual support, and collective
+        growth.
+      </p>
+      <p>The forum URL has now changed to:</p>
+      <p>
+        <a href="https://forum.womenoverseas.com/" target="_blank"
+          >forum.womenoverseas.com</a
+        >
+      </p>
+      <LinkButton href="https://forum.womenoverseas.com/" label="Go to Forum" />
+    </header>
+    <section class="recent-events">
+      <h2>Recent Events</h2>
+      <CarouselCards />
+      <br />
+    </section>
+    <section class="about-wo">
+      <h2>About WomenOverseas</h2>
+      <div class="content">
+        <p>
+          Women Overseas is an inclusive global community, specifically for
+          Chinesee women and non-binary individuals. Our goal is simple: to
+          offer a sanctuary for free expression, mutual support and collective
+          growth.
+        </p>
+        <p>
+          Through a blend of engaging webinars and intimate local gatherings, we
+          strive to empower Chinese women to nurture meaningful relationships
+          wherever life takes them, while also providing a vital network of
+          emotional support.
+        </p>
+      </div>
+      <LinkButton href="#about" label="More Details" />
+    </section>
+  </main>
+  <Footer language="en" />
+</Layout>
+
+<style>
+  main {
+    text-align: center;
+  }
+  main h1 {
+    font-size: 48px;
+    font-weight: 300;
+    margin: 24px 0;
+  }
+  main h2 {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 100;
+  }
+  header {
+    width: 100%;
+    padding: 120px 20px 60px;
+  }
+  .recent-events {
+    background-color: white;
+    padding: 20px 0;
+  }
+  .about-wo {
+    padding: 20px;
+  }
+  .about-wo .content {
+    margin: 0 auto;
+    text-align: start;
+  }
+  @media (min-width: 576px) {
+    .about-wo {
+      padding: 36px;
+    }
+  }
+  @media (min-width: 768px) {
+    main h1 {
+      font-size: 56px;
+    }
+    main h2 {
+      font-size: 48px;
+    }
+    header {
+      padding: 120px 20px 80px;
+    }
+    .about-wo .content {
+      width: 629px;
+    }
+  }
+  @media (min-width: 992px) {
+    main h1 {
+      font-size: 72px;
+    }
+  }
+</style>

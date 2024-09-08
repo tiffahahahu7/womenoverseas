@@ -1,0 +1,186 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+
+if (Astro.request.method === "POST") {
+  try {
+    const data = await Astro.request.formData();
+    const firstname = data.get("firstname");
+    const lastname = data.get("lastname");
+    const email = data.get("email");
+    const message = data.get("message");
+    // Do something with the data
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+  }
+}
+---
+
+<Layout title="About｜WomenOverseas她乡">
+  <Nav language="en" />
+  <main>
+    <section class="about-us">
+      <h1>About WomenOverseas</h1>
+      <p>
+        Women Overseas is an inclusive global community, specifically for Chinese women and non-binary individuals. Our goal is simple: to offer a sanctuary for free expression, mutual support and collective growth.
+      </p>
+      <p>Through a blend of engaging webinars and intimate local gatherings, we strive to empower Chinese women to nurture meaningful relationships wherever life takes them, while also providing a vital network of emotional support.</p>
+      <p>
+        Since its establishment on October 3, 2020, we have jointly organized nearly 30 various online and offline events, including sharing sessions, exchange activities, and shared a large amount of high-quality content through official accounts, Xiaohongshu, podcasts and other platforms. From the experience of successful job hunting for a North American PhD, to the life story of turning hobbies into the focus of life, to <a
+          href="https://mp.weixin.qq.com/s?__biz=MzAwMTMyNjA1Nw==&mid=2451852731&idx=1&sn=e949e4ec70cc1634896b4a34f5ced080&chksm=8d0b833dba7c0a2bc7f09211f9d753aef5f76d7c45f0481cf396b5eee5fd6ea6d59513127915&scene=21#wechat_redirect"
+          target="_blank">the wonderful experience of being a professional basketball player in a foreign country</a
+        >, we have been trying to present a wider world and more diverse life choices through various life stories.
+      </p>
+      <p>
+        WomenOverseas is not only a sharing platform, but also a female friendship community, helping many women find close friends in a foreign country and building an emotional support system. Recently, we have also incubated an artist community to encourage and help women with artistic interests to turn their interests into business opportunities. <a
+          href="https://mp.weixin.qq.com/s?__biz=MzAwMTMyNjA1Nw==&mid=2451853283&idx=1&sn=f362ff601e6b530a4582b3396b8df2b4&chksm=8d0b8165ba7c0873575e64f4367641276e1918e1f4490fde78e355ec311e34810f9a3a6b03b4&scene=21#wechat_redirect"
+          target="_blank"
+          >We even brought some of the works of artists from other places to the largest local art fair in San Francisco for display and sale .</a
+        >。
+      </p>
+      <p>
+        <a href="https://forum.womenoverseas.com/" target="_blank"
+          >Click to register for WomenOverseas Forum</a
+        >
+        <br />
+        <a href="https://linktr.ee/womenoverseas" target="_blank"
+          >You can also find us on other social platforms</a
+        >
+      </p>
+      <p><strong>We are waiting for you in WomenOverseas她乡, explore the vast world and become a better self.</strong></p>
+    </section>
+    <section class="contact-us">
+      <h2>Write to WomenOverseas</h2>
+      <p>If you have any suggestions or ideas for collaboration, you're welcome to get in touch with WomenOverseas.</p>
+      <br />
+      <form method="POST" class="contact-form">
+        <div class="info-wrapper">
+          <label>
+            First Name
+            <input type="text" name="firstname" />
+          </label>
+          <label>
+            Last Name
+            <input type="text" name="lastname" />
+          </label>
+          <label>
+            Email *
+            <input type="email" name="email" required />
+          </label>
+        </div>
+        <div class="action-wrapper">
+          <label>
+            Message
+            <textarea name="message" cols="50" rows="10" required></textarea>
+          </label>
+          <button class="btn">Submit</button>
+        </div>
+      </form>
+    </section>
+  </main>
+  <Footer language="en" />
+</Layout>
+
+<style>
+  main {
+    padding: 120px 20px 60px;
+  }
+  main h1 {
+    font-size: 48px;
+    font-weight: 300;
+    margin: 24px 0;
+  }
+  main h2 {
+    font-size: 36px;
+    font-weight: 100;
+    margin: 10px 0;
+  }
+  .about-us {
+    padding-bottom: 40px;
+  }
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 14px;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    display: block;
+    background-color: rgb(var(--bg-overlay));
+
+    border: 1px solid rgb(var(--primary));
+    border-radius: 4px;
+    min-height: 32px;
+    margin-top: 8px;
+    padding: 4px 8px;
+    width: 100%;
+    font: inherit;
+    color: inherit;
+  }
+  .contact-form input {
+    max-width: 335px;
+    min-width: 300px;
+  }
+  .contact-form textarea {
+    max-width: 450px;
+  }
+  .info-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .action-wrapper {
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    max-width: 450px;
+  }
+  .action-wrapper label {
+    width: 100%;
+  }
+  .contact-form .btn {
+    width: 120px;
+    border: 1px solid rgb(var(--primary));
+    background-color: rgb(var(--bg-overlay));
+    color: inherit;
+    font: inherit;
+    border-radius: 8px;
+    padding: 10px 24px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 20px;
+    transition-duration: 0.3s;
+  }
+  .contact-form .btn:hover {
+    background-color: rgb(var(--primary));
+    color: rgb(var(--bg-overlay));
+  }
+  @media (min-width: 576px) {
+    main {
+      padding: 120px 36px 60px;
+    }
+  }
+  @media (min-width: 768px) {
+    main {
+      padding: 120px 48px 60px;
+    }
+    .contact-form {
+      flex-direction: row;
+      gap: 48px;
+    }
+    .action-wrapper {
+      align-items: flex-end;
+    }
+  }
+  @media (min-width: 992px) {
+    main {
+      padding: 120px 0 60px;
+      width: 900px;
+      margin: 0 auto;
+    }
+  }
+</style>

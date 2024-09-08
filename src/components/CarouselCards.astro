@@ -1,0 +1,56 @@
+---
+import Card from "../components/Card.astro";
+import SelfCareDay from "../assets/self-care-day.webp";
+import GaoYingXia from "../assets/gao-ying-xia.webp";
+import StandUp from "../assets/stand-up-for-yourself.webp";
+---
+
+<div class="carousel-container">
+  <ul>
+    <Card
+      title="心理啦啦队论坛活动｜自我关怀日"
+      href="https://www.womenoverseas.com/events/6"
+      src={SelfCareDay}
+    />
+    <Card
+      title="线下分享会 | 高映霞：80年代的中国与艺术创作"
+      href="https://www.womenoverseas.com/events/3"
+      src={GaoYingXia}
+    />
+    <Card
+      title="心理啦啦队线上活动｜从内向外 Stand up for yourself"
+      href="https://www.womenoverseas.com/events/5"
+      src={StandUp}
+    />
+  </ul>
+</div>
+
+<style>
+  .carousel-container {
+    width: calc(100vw - 20px * 2);
+    height: 100%;
+    overflow-x: scroll;
+    margin: 0 auto;
+  }
+  .carousel-container ul {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 0;
+  }
+  @media (min-width: 576px) {
+    .carousel-container {
+        width: calc(100vw - 36px * 2);
+    }
+  }
+  @media (min-width: 992px) {
+    .carousel-container {
+        width: calc(100vw - 48px * 2);
+    }
+  }
+  @media (min-width: 1200px) {
+    .carousel-container {
+        width: calc(100vw - 72px * 2);
+    }
+  }
+</style>

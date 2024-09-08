@@ -1,0 +1,36 @@
+---
+interface Props {
+	label: string;
+	href: string;
+}
+
+const { href, label } = Astro.props;
+---
+
+<div>
+    <a href={href} target="_blank">
+        {label}
+    </a>
+</div>
+
+<style>
+    div {
+        margin-top: 36px;
+    }
+    a {
+        display: inline-block;
+        min-width: 140px;
+        background-color: rgb(var(--primary));
+        color: rgb(var(--bg-overlay));
+        border: none;
+        border-radius: 8px;
+        padding: 12px 24px;
+        text-align: center;
+        text-decoration: none;
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+    a:hover{
+        background-color: rgb(var(--brand)); 
+    }
+</style>

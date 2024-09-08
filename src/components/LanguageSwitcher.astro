@@ -1,0 +1,73 @@
+---
+import { languages } from "../i18n/ui";
+import { getLangFromUrl, useTranslatedPath } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+---
+
+<div class="language-switcher">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    fill="black"
+    class="bi bi-translate"
+    viewBox="0 0 16 16"
+  >
+    <path
+      d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286zm1.634-.736L5.5 3.956h-.049l-.679 2.022z"
+    ></path>
+    <path
+      d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zm7.138 9.995q.289.451.63.846c-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6 6 0 0 1-.415-.492 2 2 0 0 1-.94.31"
+    ></path>
+  </svg>
+  <label for="language-select" class="sr-only">Choose a language</label>
+  <select id="language-select">
+    <option value="zh" selected={lang === "zh"}>ZH</option>
+    <option value="en" selected={lang === "en"}>EN</option>
+  </select>
+</div>
+
+<style>
+  .language-switcher {
+    position: relative;
+  }
+  .language-switcher svg {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    pointer-events: none;
+  }
+  #language-select {
+    padding: 8px 30px;
+    font-size: 14px;
+    font-family: inherit;
+    background-color: rgb(var(--bg-overlay));
+    border: 1px solid #999a9c;
+    border-radius: 4px;
+    appearance: none; /* Removes the default styling on some browsers */
+    -webkit-appearance: none; /* For Safari and Chrome */
+    -moz-appearance: none; /* For Firefox */
+    cursor: pointer;
+    width: 82px;
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 14px;
+  }
+</style>
+
+<!-- <a href={translatePath('/', lang)}>{label}</a> -->
+<script>
+  import { useTranslatedPath } from "../i18n/utils";
+
+  const languageSelect = document.getElementById("language-select");
+  languageSelect.addEventListener("change", () => {
+    const selectedLanguage = languageSelect.value;
+    const translatePath = useTranslatedPath(selectedLanguage);
+    const currentPath = window.location.pathname;
+    const pathWithoutLang = currentPath.replace(/^\/[a-z]{2}\//, "/");
+    window.location.href = translatePath(pathWithoutLang, selectedLanguage);
+  });
+</script>
