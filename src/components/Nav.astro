@@ -6,7 +6,6 @@ interface Props {
 const { language } = Astro.props;
 
 import { Image } from "astro:assets";
-import wo_logo from "./public/wo_logo.webp";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
 import {
   getLangFromUrl,
@@ -23,7 +22,7 @@ const currentPath = Astro.url.pathname;
 <nav id="nav">
   <div class="nav-bar">
     <div class="wo-logo">
-      <a href={translatePath("/")}><Image src={wo_logo} alt="woman overseas logo" /></a>
+      <a href={translatePath("/")}><Image src="/wo_logo.webp" alt="woman overseas logo"  width="104" height="40" /></a>
     </div>
     <input class="menu-btn" type="checkbox" id="menu-btn" />
     <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label
@@ -89,10 +88,6 @@ const currentPath = Astro.url.pathname;
     position: absolute;
     left: 24px;
     top: 10px;
-  }
-  .wo-logo img {
-    width: 104px;
-    height: 40px;
   }
 
   .nav-bar ul {

@@ -4,16 +4,13 @@ interface Props {
 }
 
 const { language } = Astro.props;
-
 import { Image } from "astro:assets";
-import wo_logo from "./public/wo_logo.webp";
-import donate from "./public/btn_donateCC_LG.gif";
 ---
 
 <footer class="footer">
   <div class="footer-col">
     <div class="wo-logo">
-      <Image src={wo_logo} alt="woman overseas logo" />
+      <Image src="/wo_logo.webp" alt="woman overseas logo" width="170" height="65"/>
     </div>
     <div class="desc">
       <p>
@@ -84,7 +81,7 @@ import donate from "./public/btn_donateCC_LG.gif";
   </div>
   <div class="footer-col">
     <h3>{language === "zh" ? "赞助她乡" : "Donate"}</h3>
-    <Image class="donate" src={donate} alt="donate button" />
+    <Image class="donate" src="/btn_donateCC_LG.gif" alt="donate button" width="147" height="47" />
   </div>
   <div class="footer-col">
     <h3>{language === "zh" ? "联系她乡" : "Contact"}</h3>
@@ -123,10 +120,6 @@ import donate from "./public/btn_donateCC_LG.gif";
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  .footer-col .wo-logo img {
-    width: 170px;
-    height: 65px;
   }
   .footer-col h3 {
     font-size: 20px;
