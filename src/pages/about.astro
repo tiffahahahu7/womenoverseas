@@ -48,7 +48,6 @@ import Footer from "../components/Footer.astro";
         netlify-honeypot="bot-field"
         name="contact-form"
       >
-        <input type="hidden" name="form-name" value="contact-form" />
         <div class="info-wrapper">
           <label>
             First Name
@@ -181,7 +180,7 @@ import Footer from "../components/Footer.astro";
 
 <script>
   const form = document.getElementById("contact-form") as HTMLFormElement;
-  // const formMessage = document.getElementById("formMessage");
+  const formMessage = document.getElementById("formMessage");
   const handleFormSubmit = (event: any) => {
     event.preventDefault();
 
@@ -193,8 +192,22 @@ import Footer from "../components/Footer.astro";
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams(formData as any).toString(),
     })
-      .then(() => console.log("Form successfully submitted"))
-      .catch((error) => alert(error));
+      .then(() => {
+        if (formMessage) {
+          formMessage.textContent =
+            "Thank you! Your message was submitted successfully.";
+          formMessage.style.display = "block";
+          form.reset();
+        }
+      })
+      .catch((error) => {
+        if (formMessage) {
+          formMessage.textContent =
+            "Oops! There was a problem submitting the form.";
+          formMessage.style.display = "block";
+          formMessage.style.color = "red";
+        }
+      });
   };
 
   form && form.addEventListener("submit", handleFormSubmit);
