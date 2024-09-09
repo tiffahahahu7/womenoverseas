@@ -2,21 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
-
-if (Astro.request.method === "POST") {
-  try {
-    const data = await Astro.request.formData();
-    const firstname = data.get("firstname");
-    const lastname = data.get("lastname");
-    const email = data.get("email");
-    const message = data.get("message");
-    // Do something with the data
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error(error.message);
-    }
-  }
-}
 ---
 
 <Layout title="关于她乡｜WomenOverseas她乡">
@@ -56,7 +41,13 @@ if (Astro.request.method === "POST") {
       <h2>给她乡写信</h2>
       <p>如果你有任何建议、合作的想法，都欢迎和她乡取得联系。</p>
       <br />
-      <form method="POST" class="contact-form">
+      <form
+        method="POST"
+        id="contact-form"
+        name="contact-form"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+      >
         <div class="info-wrapper">
           <label>
             First Name
@@ -76,7 +67,8 @@ if (Astro.request.method === "POST") {
             Message
             <textarea name="message" cols="50" rows="10" required></textarea>
           </label>
-          <button class="btn">发送</button>
+          <button class="btn" type="submit">发送</button>
+          <span id="formMessage"></span>
         </div>
       </form>
     </section>
@@ -101,14 +93,14 @@ if (Astro.request.method === "POST") {
   .about-us {
     padding-bottom: 40px;
   }
-  .contact-form {
+  #contact-form {
     display: flex;
     flex-direction: column;
     gap: 20px;
     font-size: 14px;
   }
-  .contact-form input,
-  .contact-form textarea {
+  #contact-form input,
+  #contact-form textarea {
     display: block;
     background-color: rgb(var(--bg-overlay));
 
@@ -121,11 +113,11 @@ if (Astro.request.method === "POST") {
     font: inherit;
     color: inherit;
   }
-  .contact-form input {
+  #contact-form input {
     max-width: 335px;
     min-width: 300px;
   }
-  .contact-form textarea {
+  #contact-form textarea {
     max-width: 450px;
   }
   .info-wrapper {
@@ -136,13 +128,16 @@ if (Astro.request.method === "POST") {
   .action-wrapper {
     display: flex;
     flex-direction: column;
-    width:100%;
+    width: 100%;
     max-width: 450px;
   }
   .action-wrapper label {
     width: 100%;
   }
-  .contact-form .btn {
+  .action-wrapper #formMessage {
+    margin-top: 10px;
+  }
+  #contact-form .btn {
     width: 120px;
     border: 1px solid rgb(var(--primary));
     background-color: rgb(var(--bg-overlay));
@@ -154,7 +149,7 @@ if (Astro.request.method === "POST") {
     margin-top: 20px;
     transition-duration: 0.3s;
   }
-  .contact-form .btn:hover {
+  #contact-form .btn:hover {
     background-color: rgb(var(--primary));
     color: rgb(var(--bg-overlay));
   }
@@ -167,7 +162,7 @@ if (Astro.request.method === "POST") {
     main {
       padding: 120px 48px 60px;
     }
-    .contact-form {
+    #contact-form {
       flex-direction: row;
       gap: 48px;
     }
@@ -183,3 +178,52 @@ if (Astro.request.method === "POST") {
     }
   }
 </style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("contact-form") as HTMLFormElement;
+    const formMessage = document.getElementById("formMessage");
+
+    form &&
+      form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        // Prepare form data
+        const formData = new FormData(form);
+
+        try {
+          // Send form data to Netlify
+          const response = await fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData as any).toString(),
+          });
+
+          if (response.ok) {
+            // Show success message and clear the form
+            if (formMessage) {
+              formMessage.textContent =
+                "Thank you! Your message was submitted successfully.";
+              formMessage.style.display = "block";
+              form.reset();
+            }
+          } else {
+            // Show error message
+            if (formMessage) {
+              formMessage.textContent =
+                "Oops! There was a problem submitting the form.";
+              formMessage.style.display = "block";
+              formMessage.style.color = "red";
+            }
+          }
+        } catch (error) {
+          // Handle fetch error
+          if (formMessage) {
+            formMessage.textContent = "Network error: Please try again later.";
+            formMessage.style.display = "block";
+            formMessage.style.color = "red";
+          }
+        }
+      });
+  });
+</script>
