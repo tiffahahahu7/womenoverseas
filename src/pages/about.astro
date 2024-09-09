@@ -64,7 +64,7 @@ import Footer from "../components/Footer.astro";
         </div>
         <div class="action-wrapper">
           <label>
-            Message
+            Message *
             <textarea name="message" cols="50" rows="10" required></textarea>
           </label>
           <button class="btn" type="submit">发送</button>
@@ -103,7 +103,6 @@ import Footer from "../components/Footer.astro";
   #contact-form textarea {
     display: block;
     background-color: rgb(var(--bg-overlay));
-
     border: 1px solid rgb(var(--primary));
     border-radius: 4px;
     min-height: 32px;
@@ -187,10 +186,11 @@ import Footer from "../components/Footer.astro";
     form &&
       form.addEventListener("submit", async function (event) {
         event.preventDefault();
-
-        // Prepare form data
         const formData = new FormData(form);
-
+        //reset formMessage
+        if (formMessage){
+          formMessage.textContent = "";
+        }
         try {
           // Send form data to Netlify
           const response = await fetch("/", {
