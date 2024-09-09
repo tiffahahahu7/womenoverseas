@@ -48,7 +48,7 @@ import Footer from "../components/Footer.astro";
         netlify-honeypot="bot-field"
         name="contact-form"
       >
-        <input type="hidden" name="form-name" value="contact">
+        <input type="hidden" name="form-name" value="contact-form" />
         <div class="info-wrapper">
           <label>
             First Name
@@ -182,6 +182,15 @@ import Footer from "../components/Footer.astro";
 <script>
   const form = document.getElementById("contact-form") as HTMLFormElement;
   const formMessage = document.getElementById("formMessage");
+  const inputs = form.querySelectorAll("input, textarea"); 
+
+  inputs.forEach((input) => {
+    input.addEventListener("input", () => {
+      if (formMessage) {
+        formMessage.textContent = ""; 
+      }
+    });
+  });
   const handleFormSubmit = (event: any) => {
     event.preventDefault();
 
@@ -194,11 +203,11 @@ import Footer from "../components/Footer.astro";
       body: new URLSearchParams(formData as any).toString(),
     })
       .then(() => {
-        console.log("Form successfully submitted");
         if (formMessage) {
           formMessage.textContent =
             "Thank you! Your message was submitted successfully.";
           formMessage.style.display = "block";
+          form.reset();
         }
       })
       .catch((error) => {
