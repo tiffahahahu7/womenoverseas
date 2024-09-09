@@ -1,9 +1,7 @@
 ---
-import { languages } from "../i18n/ui";
-import { getLangFromUrl, useTranslatedPath } from "../i18n/utils";
+import { getLangFromUrl } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
-const translatePath = useTranslatedPath(lang);
 ---
 
 <div class="language-switcher">
@@ -58,13 +56,15 @@ const translatePath = useTranslatedPath(lang);
   }
 </style>
 
-<!-- <a href={translatePath('/', lang)}>{label}</a> -->
 <script>
   import { useTranslatedPath } from "../i18n/utils";
+  import { ui } from "../i18n/ui";
 
-  const languageSelect = document.getElementById("language-select");
+  const languageSelect = document.getElementById(
+    "language-select"
+  ) as HTMLSelectElement;
   languageSelect.addEventListener("change", () => {
-    const selectedLanguage = languageSelect.value;
+    const selectedLanguage = languageSelect.value as keyof typeof ui;
     const translatePath = useTranslatedPath(selectedLanguage);
     const currentPath = window.location.pathname;
     const pathWithoutLang = currentPath.replace(/^\/[a-z]{2}\//, "/");
