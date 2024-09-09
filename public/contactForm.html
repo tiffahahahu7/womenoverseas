@@ -1,25 +1,30 @@
-<form id="contact-form" method="POST" data-netlify="true" name="contact-form">
-  <input type="hidden" name="form-name" value="contact-form" />
-    <div class="info-wrapper">
-      <label>
-        First Name
-        <input type="text" name="firstname" />
-      </label>
-      <label>
-        Last Name
-        <input type="text" name="lastname" />
-      </label>
-      <label>
-        Email *
-        <input type="email" name="email" required />
-      </label>
-    </div>
-    <div class="action-wrapper">
-      <label>
-        Message *
-        <textarea name="message" cols="50" rows="10" required></textarea>
-      </label>
-      <button class="btn" type="submit">发送</button>
-      <span id="formMessage"></span>
-    </div>
+<form
+id="contact-form"
+method="POST"
+data-netlify="true"
+name="contact-form"
+>
+<input type="hidden" name="form-name" value="contact-form" />
+<div class="info-wrapper">
+  <label>
+    First Name
+    <input type="text" name="firstname" />
+  </label>
+  <label>
+    Last Name
+    <input type="text" name="lastname" />
+  </label>
+  <label>
+    Email *
+    <input type="email" name="email" required />
+  </label>
+</div>
+<div class="action-wrapper">
+  <label>
+    Message *
+    <textarea name="message" cols="50" rows="10" required></textarea>
+  </label>
+  <button class="btn" type="submit">发送</button>
+  <span id="formMessage"></span>
+</div>
 </form>

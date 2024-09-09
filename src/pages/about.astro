@@ -41,7 +41,12 @@ import Footer from "../components/Footer.astro";
       <h2>给她乡写信</h2>
       <p>如果你有任何建议、合作的想法，都欢迎和她乡取得联系。</p>
       <br />
-      <form id="contact-form" method="POST" data-netlify="true" name="contact-form">
+      <form
+        id="contact-form"
+        method="POST"
+        data-netlify="true"
+        name="contact-form"
+      >
         <input type="hidden" name="form-name" value="contact-form" />
         <div class="info-wrapper">
           <label>
@@ -172,3 +177,24 @@ import Footer from "../components/Footer.astro";
     }
   }
 </style>
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement;
+  // const formMessage = document.getElementById("formMessage");
+  const handleFormSubmit = (event: any) => {
+    event.preventDefault();
+
+    const myForm = event.target;
+    const formData = new FormData(myForm);
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData as any).toString(),
+    })
+      .then(() => console.log("Form successfully submitted"))
+      .catch((error) => alert(error));
+  };
+
+  form && form.addEventListener("submit", handleFormSubmit);
+</script>
